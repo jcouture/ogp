@@ -1,10 +1,19 @@
 require 'oga'
+require 'ostruct'
 
 REQUIRED_ATTRIBUTES = %w(title type image url)
 
 module OGP
   class OpenGraph
-    attr_accessor :title, :type, :image, :url
+    # Required Accessors
+    attr_accessor :title, :type, :url
+    attr_accessor :images
+    
+    # Optional Accessors
+    attr_accessor :description, :determiner, :site_name
+    attr_accessor :audio
+    attr_accessor :locales
+    attr_accessor :video
 
     def initialize(source)
       if source.nil? || source.empty?
@@ -15,9 +24,12 @@ module OGP
         raise MalformedSourceError
       end
 
+      self.images = []
+      self.locales = []
+
       document = Oga.parse_html(source)
       check_required_attributes(document)
-      parse_required_attributes(document)
+      parse_attributes(document)
     end
 
     private
@@ -30,14 +42,20 @@ module OGP
       end
     end
 
-    def parse_required_attributes(document)
-      REQUIRED_ATTRIBUTES.each do |attribute_name|
-        instance_variable_set("@#{attribute_name}", parse_attribute(document, attribute_name))
+    def parse_attributes(document)
+      document.xpath('//head/meta[starts-with(@property, \'og:\')]').each do |attribute|
+        attribute_name = attribute.get('property').downcase.gsub('og:', '')
+        case attribute_name
+        when /^image$/i
+          self.images << OpenStruct.new(url: attribute.get('content').to_s)
+        when /^image:(.+)/i
+          self.images.last[$1.gsub('-','_')] = attribute.get('content').to_s
+        when /^locale/i
+          self.locales << attribute.get('content').to_s
+        else
+          instance_variable_set("@#{attribute_name}", attribute.get('content'))
+        end
       end
-    end
-
-    def parse_attribute(document, name)
-      document.at_xpath("//head/meta[@property='og:#{name}']").get('content')
     end
 
     def attribute_exists(document, name)
