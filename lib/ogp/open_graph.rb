@@ -3,15 +3,27 @@ require 'oga'
 REQUIRED_ATTRIBUTES = %w(title type image url)
 
 module OGP
+  class MissingAttributeError < StandardError
+  end
+
   class OpenGraph
     attr_accessor :title, :type, :image, :url
 
     def initialize(source)
       document = Oga.parse_html(source)
+      check_required_attributes(document)
       parse_required_attributes(document)
     end
 
     private
+
+    def check_required_attributes(document)
+      REQUIRED_ATTRIBUTES.each do |attribute_name|
+        if !attribute_exists(document, attribute_name)
+          raise MissingAttributeError.new("Missing required attribute: #{attribute_name}")
+        end
+      end
+    end
 
     def parse_required_attributes(document)
       REQUIRED_ATTRIBUTES.each do |attribute_name|
@@ -21,6 +33,10 @@ module OGP
 
     def parse_attribute(document, name)
       document.at_xpath("//head/meta[@property='og:#{name}']").get('content')
+    end
+
+    def attribute_exists(document, name)
+      document.at_xpath("boolean(//head/meta[@property='og:#{name}'])")
     end
   end
 end
