@@ -1,5 +1,5 @@
 require "ogp/version"
 
-module Ogp
+module OGP
   # Your code goes here...
 end
