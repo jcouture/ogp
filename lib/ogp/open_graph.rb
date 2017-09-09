@@ -11,9 +11,9 @@ module OGP
     
     # Optional Accessors
     attr_accessor :description, :determiner, :site_name
-    attr_accessor :audio
+    attr_accessor :audios
     attr_accessor :locales
-    attr_accessor :video
+    attr_accessor :videos
 
     def initialize(source)
       if source.nil? || source.empty?
@@ -25,7 +25,9 @@ module OGP
       end
 
       self.images = []
+      self.audios = []
       self.locales = []
+      self.videos = []
 
       document = Oga.parse_html(source)
       check_required_attributes(document)
@@ -50,8 +52,16 @@ module OGP
           self.images << OpenStruct.new(url: attribute.get('content').to_s)
         when /^image:(.+)/i
           self.images.last[$1.gsub('-','_')] = attribute.get('content').to_s
+        when /^audio$/i
+          self.audios << OpenStruct.new(url: attribute.get('content').to_s)
+        when /^audio:(.+)/i
+          self.audios.last[$1.gsub('-','_')] = attribute.get('content').to_s
         when /^locale/i
           self.locales << attribute.get('content').to_s
+        when /^video$/i
+          self.videos << OpenStruct.new(url: attribute.get('content').to_s)
+        when /^video:(.+)/i
+          self.videos.last[$1.gsub('-','_')] = attribute.get('content').to_s
         else
           instance_variable_set("@#{attribute_name}", attribute.get('content'))
         end
