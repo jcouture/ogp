@@ -21,5 +21,23 @@ describe OGP::OpenGraph do
         expect{OGP::OpenGraph.new(content)}.to raise_error(OGP::MissingAttributeError)
       end
     end
+
+    context 'with nil source' do
+      it 'should raise an error' do
+        expect{OGP::OpenGraph.new(nil)}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with empty source' do
+      it 'should raise an error' do
+        expect{OGP::OpenGraph.new('')}.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with malformed source' do
+      it 'should raise an error' do
+        expect{OGP::OpenGraph.new('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}.to raise_error(OGP::MalformedSourceError)
+      end
+    end
   end
 end
