@@ -91,5 +91,21 @@ describe OGP::OpenGraph do
         expect(open_graph.videos[0].height).to eql('300')
       end
     end
+
+    context 'with multiples image attributes' do
+      it 'should create a proper OpenGraph object' do
+        content = File.read("#{File.dirname(__FILE__)}/../view/multiple_images_attributes.html")
+        open_graph = OGP::OpenGraph.new(content)
+
+        expect(open_graph.images[0].url).to eql('http://example.com/ogp1.jpg')
+        expect(open_graph.images[0].type).to eql('image/jpeg')
+        expect(open_graph.images[0].width).to eql('400')
+        expect(open_graph.images[0].height).to eql('300')
+        expect(open_graph.images[1].url).to eql('http://example.com/ogp2.jpg')
+        expect(open_graph.images[1].type).to eql('image/jpeg')
+        expect(open_graph.images[1].width).to eql('600')
+        expect(open_graph.images[1].height).to eql('500')
+      end
+    end
   end
 end
