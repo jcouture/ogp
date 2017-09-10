@@ -4,7 +4,7 @@ describe OGP::OpenGraph do
   describe '#initialize' do
     context 'with strictly the required attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/required_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/required_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.title).to eql('The Rock')
@@ -16,7 +16,7 @@ describe OGP::OpenGraph do
 
     context 'with missing one of the required attributes' do
       it 'should raise an error' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/missing_required_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/missing_required_attributes.html")
         
         expect{OGP::OpenGraph.new(content)}.to raise_error(OGP::MissingAttributeError)
       end
@@ -42,7 +42,7 @@ describe OGP::OpenGraph do
 
     context 'with optional attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/optional_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/optional_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.audios[0].url).to eql('http://example.com/bond/theme.mp3')
@@ -56,7 +56,7 @@ describe OGP::OpenGraph do
 
     context 'with image structured attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/image_structured_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/image_structured_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.images[0].url).to eql('http://example.com/ogp.jpg')
@@ -70,7 +70,7 @@ describe OGP::OpenGraph do
 
     context 'with audio structured attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/audio_structured_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/audio_structured_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.audios[0].url).to eql('http://example.com/sound.ogg')
@@ -81,7 +81,7 @@ describe OGP::OpenGraph do
 
     context 'with video structured attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/video_structured_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/video_structured_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.videos[0].url).to eql('http://example.com/movie.swf')
@@ -94,7 +94,7 @@ describe OGP::OpenGraph do
 
     context 'with multiples image attributes' do
       it 'should create a proper OpenGraph object' do
-        content = File.read("#{File.dirname(__FILE__)}/../view/multiple_images_attributes.html")
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/multiple_images_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
         expect(open_graph.images[0].url).to eql('http://example.com/ogp1.jpg')
