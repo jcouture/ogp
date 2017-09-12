@@ -10,7 +10,7 @@ describe OGP::OpenGraph do
         expect(open_graph.title).to eql('The Rock')
         expect(open_graph.type).to eql('video.movie')
         expect(open_graph.url).to eql('http://www.imdb.com/title/tt0117500/')
-        expect(open_graph.images[0].url).to eql('http://ia.media-imdb.com/images/rock.jpg')
+        expect(open_graph.image.url).to eql('http://ia.media-imdb.com/images/rock.jpg')
       end
     end
 
@@ -59,12 +59,12 @@ describe OGP::OpenGraph do
         content = File.read("#{File.dirname(__FILE__)}/../fixtures/image_structured_attributes.html")
         open_graph = OGP::OpenGraph.new(content)
 
-        expect(open_graph.images[0].url).to eql('http://example.com/ogp.jpg')
-        expect(open_graph.images[0].secure_url).to eql('https://secure.example.com/ogp.jpg')
-        expect(open_graph.images[0].type).to eql('image/jpeg')
-        expect(open_graph.images[0].width).to eql('400')
-        expect(open_graph.images[0].height).to eql('300')
-        expect(open_graph.images[0].alt).to eql('A shiny red apple with a bite taken out')
+        expect(open_graph.image.url).to eql('http://example.com/ogp.jpg')
+        expect(open_graph.image.secure_url).to eql('https://secure.example.com/ogp.jpg')
+        expect(open_graph.image.type).to eql('image/jpeg')
+        expect(open_graph.image.width).to eql('400')
+        expect(open_graph.image.height).to eql('300')
+        expect(open_graph.image.alt).to eql('A shiny red apple with a bite taken out')
       end
     end
 

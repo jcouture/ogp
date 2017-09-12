@@ -34,6 +34,11 @@ module OGP
       parse_attributes(document)
     end
 
+    def image
+      return if self.images.nil?
+      return self.images.first
+    end
+
     private
 
     def check_required_attributes(document)
