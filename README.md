@@ -4,7 +4,7 @@ OGP is a minimalist Ruby library that does only one thing: parse Open Graph prot
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application’s Gemfile:
 
 ```ruby
 gem 'ogp'
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-To keep it very simple, OGP does not perform any HTTP operations. As such, in this example, we use [Faraday](https://github.com/lostisland/faraday) to achieve this functionality.
+In order to keep OGP very simple, it does not perform any HTTP operations. As such, in this example, [Faraday](https://github.com/lostisland/faraday) is used to achieve this functionality.
 
 ```ruby
 require 'faraday'
