@@ -1,8 +1,6 @@
-# Ogp
+# OGP
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ogp`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+OGP is a minimalist Ruby library that does only one thing: parse Open Graph protocol information from web sites. For more information: http://ogp.me.
 
 ## Installation
 
@@ -22,13 +20,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To keep it very simple, OGP does not perform any HTTP operations. As such, in this example, we use [Faraday](https://github.com/lostisland/faraday) to achieve this functionality.
 
-## Development
+```ruby
+require 'faraday'
+require 'ogp'
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+response = Faraday.get('http://ogp.me')
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+open_graph = OGP::OpenGraph.new(response.body)
+open_graph.title # => "Open Graph protocol"
+open_graph.type # => "website"
+open_graph.image.url # => "http://ogp.me/logo.png"
+open_graph.url # => "http://ogp.me/"
+```
 
 ## Contributing
 
