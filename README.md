@@ -54,3 +54,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/jcoutu
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
+The OGP pirate logo is based on [this icon](https://thenounproject.com/term/pirate/9414/) by [Simon Child](https://thenounproject.com/Simon%20Child/), from the Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
