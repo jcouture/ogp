@@ -1,0 +1,120 @@
+AllCops:
+  DisplayCopNames: true
+  Include:
+    - Rakefile
+    - config.ru
+    - Gemfile
+    - app/tasks/**/*.rake
+  Exclude:
+    - bin/**
+    - db/schema.rb
+    - db/migrate/**
+    - script/**
+    - vendor/**/*
+    - node_modules/**/*
+  TargetRubyVersion: 2.3
+
+Rails:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 200
+
+AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+IfUnlessModifier:
+  Enabled: false
+
+CaseIndentation:
+  EnforcedStyle: end
+  IndentOneStep: true
+
+MethodLength:
+  CountComments: false
+  Max: 25
+
+SignalException:
+  Enabled: false
+
+ColonMethodCall:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+RegexpLiteral:
+  Enabled: false
+
+AssignmentInCondition:
+  Enabled: false
+
+ParameterLists:
+  CountKeywordArgs: false
+
+SingleLineBlockParams:
+  Methods:
+    - reduce:
+      - memo
+      - item
+
+MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/SymbolArray:
+  Enabled: true
+
+Layout/ExtraSpacing:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/IndentArray:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 200
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%I': '()'
+    '%w': '()'
+    '%W': '()'
+
+Layout/SpaceInLambdaLiteral:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Performance/StringReplacement:
+  Enabled: false

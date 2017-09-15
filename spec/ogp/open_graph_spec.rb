@@ -17,26 +17,26 @@ describe OGP::OpenGraph do
     context 'with missing one of the required attributes' do
       it 'should raise an error' do
         content = File.read("#{File.dirname(__FILE__)}/../fixtures/missing_required_attributes.html")
-        
-        expect{OGP::OpenGraph.new(content)}.to raise_error(OGP::MissingAttributeError)
+
+        expect { OGP::OpenGraph.new(content) }.to raise_error(OGP::MissingAttributeError)
       end
     end
 
     context 'with nil source' do
       it 'should raise an error' do
-        expect{OGP::OpenGraph.new(nil)}.to raise_error(ArgumentError)
+        expect { OGP::OpenGraph.new(nil) }.to raise_error(ArgumentError)
       end
     end
 
     context 'with empty source' do
       it 'should raise an error' do
-        expect{OGP::OpenGraph.new('')}.to raise_error(ArgumentError)
+        expect { OGP::OpenGraph.new('') }.to raise_error(ArgumentError)
       end
     end
 
     context 'with malformed source' do
       it 'should raise an error' do
-        expect{OGP::OpenGraph.new('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}.to raise_error(OGP::MalformedSourceError)
+        expect { OGP::OpenGraph.new('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }.to raise_error(OGP::MalformedSourceError)
       end
     end
 
