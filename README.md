@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/mirego/ogp">
+  <a href="https://github.com/jcouture/ogp">
     <img src="https://i.imgur.com/qZrMsLq.png" alt="ogp" />
   </a>
   <br />
