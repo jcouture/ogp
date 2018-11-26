@@ -1,4 +1,4 @@
-require 'oga'
+require 'nokogiri'
 require 'ostruct'
 
 REQUIRED_ATTRIBUTES = %w(title type image url).freeze
@@ -27,7 +27,7 @@ module OGP
       self.locales = []
       self.videos = []
 
-      document = Oga.parse_html(source)
+      document = Nokogiri::HTML.parse(source)
       check_required_attributes(document)
       parse_attributes(document)
     end
@@ -46,31 +46,32 @@ module OGP
     end
 
     def parse_attributes(document)
-      document.xpath('//head/meta[starts-with(@property, \'og:\')]').each do |attribute|
-        attribute_name = attribute.get('property').downcase.gsub('og:', '')
+      document.xpath('//head/meta[starts-with(@property, \'og:\')]').each do |node|
+        attribute_name = node.attribute('property').to_s.downcase.gsub('og:', '').tr('-', '_')
+        content = node.attribute('content').to_s
         case attribute_name
           when /^image$/i
-            images << OpenStruct.new(url: attribute.get('content').to_s)
+            images << OpenStruct.new(url: content)
           when /^image:(.+)/i
-            images.last[Regexp.last_match[1].gsub('-', '_')] = attribute.get('content').to_s
+            images.last[Regexp.last_match[1]] = content
           when /^audio$/i
-            audios << OpenStruct.new(url: attribute.get('content').to_s)
+            audios << OpenStruct.new(url: content)
           when /^audio:(.+)/i
-            audios.last[Regexp.last_match[1].gsub('-', '_')] = attribute.get('content').to_s
+            audios.last[Regexp.last_match[1]] = content
           when /^locale/i
-            locales << attribute.get('content').to_s
+            locales << content
           when /^video$/i
-            videos << OpenStruct.new(url: attribute.get('content').to_s)
+            videos << OpenStruct.new(url: content)
           when /^video:(.+)/i
-            videos.last[Regexp.last_match[1].gsub('-', '_')] = attribute.get('content').to_s
+            videos.last[Regexp.last_match[1]] = content
           else
-            instance_variable_set("@#{attribute_name}", attribute.get('content'))
+            instance_variable_set("@#{attribute_name}", content)
         end
       end
     end
 
     def attribute_exists(document, name)
-      document.at_xpath("boolean(//head/meta[@property='og:#{name}'])")
+      document.xpath("boolean(//head/meta[@property='og:#{name}'])")
     end
   end
 
