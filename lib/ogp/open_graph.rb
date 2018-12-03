@@ -28,6 +28,7 @@ module OGP
       self.videos = []
 
       document = Nokogiri::HTML.parse(source)
+      document.encoding = 'utf-8'
       check_required_attributes(document)
       parse_attributes(document)
     end
