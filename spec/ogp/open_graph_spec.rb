@@ -107,5 +107,26 @@ describe OGP::OpenGraph do
         expect(open_graph.images[1].height).to eql('500')
       end
     end
+
+    context 'with no root video attributes' do
+      it 'should create a proper OpenGraph object' do
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/no_root_attributes.html")
+        open_graph = OGP::OpenGraph.new(content)
+
+        expect(open_graph.images[0].url).to eql('http://example.com/ogp.jpg')
+        expect(open_graph.images[0].secure_url).to eql('https://secure.example.com/ogp.jpg')
+        expect(open_graph.images[0].type).to eql('image/jpeg')
+        expect(open_graph.images[0].width).to eql('400')
+        expect(open_graph.images[0].height).to eql('300')
+        expect(open_graph.images[0].alt).to eql('A shiny red apple with a bite taken out')
+        expect(open_graph.videos[0].url).to eql('http://example.com/movie.swf')
+        expect(open_graph.videos[0].secure_url).to eql('https://secure.example.com/movie.swf')
+        expect(open_graph.videos[0].type).to eql('application/x-shockwave-flash')
+        expect(open_graph.videos[0].width).to eql('400')
+        expect(open_graph.videos[0].height).to eql('300')
+        expect(open_graph.audios[0].url).to eql('http://example.com/sound.ogg')
+        expect(open_graph.audios[0].secure_url).to eql('https://secure.example.com/sound.ogg')
+      end
+    end
   end
 end
