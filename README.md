@@ -6,8 +6,6 @@
   OGP is a minimalist Ruby library that does only one thing: parse Open Graph protocol information. For more information: <a href="http://ogp.me">http://ogp.me</a>.
   <br /><br />
   <a href="https://rubygems.org/gems/ogp"><img src="http://img.shields.io/gem/v/ogp.svg" /></a>
-  <a href="https://codeclimate.com/github/jcouture/ogp"><img src="http://img.shields.io/codeclimate/github/jcouture/ogp.svg" /></a>
-  <a href="https://gemnasium.com/jcouture/ogp"><img src="http://img.shields.io/gemnasium/jcouture/ogp.svg" /></a>
   <a href="https://travis-ci.org/jcouture/ogp"><img src="http://img.shields.io/travis/jcouture/ogp.svg" /></a>
 </p>
 
