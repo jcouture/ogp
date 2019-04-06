@@ -128,5 +128,18 @@ describe OGP::OpenGraph do
         expect(open_graph.audios[0].secure_url).to eql('https://secure.example.com/sound.ogg')
       end
     end
+
+    context 'with internationalization and unexpected encoding' do
+      it 'should create a proper OpenGraph object' do
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/i18n_encoding.html", encoding: 'ASCII-8BIT')
+        open_graph = OGP::OpenGraph.new(content)
+
+        expect(open_graph.title).to eql('Hello 世界')
+        expect(open_graph.description).to eql('Быстрая коричневая лиса прыгает через ленивую собаку.')
+        expect(open_graph.type).to eql('website')
+        expect(open_graph.url).to eql('https://www.example.com')
+        expect(open_graph.image.url).to eql('https://www.example.com/image.jpg')
+      end
+    end
   end
 end

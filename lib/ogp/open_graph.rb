@@ -22,6 +22,8 @@ module OGP
 
       raise MalformedSourceError unless source.include?('</html>')
 
+      source.force_encoding('UTF-8') if source.encoding != 'UTF-8'
+
       self.images = []
       self.audios = []
       self.locales = []
