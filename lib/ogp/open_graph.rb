@@ -47,6 +47,7 @@ module OGP
       end
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def parse_attributes(document)
       document.xpath('//head/meta[starts-with(@property, \'og:\')]').each do |attribute|
         attribute_name = attribute.get('property').downcase.gsub('og:', '')
