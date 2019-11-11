@@ -141,5 +141,17 @@ describe OGP::OpenGraph do
         expect(open_graph.image.url).to eql('https://www.example.com/image.jpg')
       end
     end
+
+    context 'with custom attributes' do
+      it 'should include them to the data hash' do
+        content = File.read("#{File.dirname(__FILE__)}/../fixtures/custom_attributes.html", encoding: 'ASCII-8BIT')
+        open_graph = OGP::OpenGraph.new(content)
+
+        expect(open_graph.title).to eql('Way Out')
+        expect(open_graph.data['title']).to eql(open_graph.title)
+        expect(open_graph.data['restrictions:country:allowed'].size).to eql(3)
+        expect(open_graph.data['restrictions:country:allowed'][0]).to eql('AR')
+      end
+    end
   end
 end
