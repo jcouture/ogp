@@ -1,6 +1,7 @@
 require 'oga'
 require 'ostruct'
 
+DEFAULT_REQUIRED_ATTRIBUTES = %w(title type image url).freeze
 
 module OGP
   class OpenGraph
@@ -19,10 +20,12 @@ module OGP
     attr_accessor :locales
     attr_accessor :videos
 
-    def initialize(source)
+    def initialize(source, opts = {})
       if source.nil? || source.empty?
         raise ArgumentError, '`source` cannot be nil or empty.'
       end
+      
+      opts[:required_attributes] ||= DEFAULT_REQUIRED_ATTRIBUTES
 
       raise MalformedSourceError unless source.include?('</html>')
 
@@ -35,7 +38,7 @@ module OGP
       self.videos = []
 
       document = Oga.parse_html(source)
-      check_required_attributes(document)
+      check_required_attributes(document, opts[:required_attributes])
       parse_attributes(document)
     end
 
@@ -46,8 +49,8 @@ module OGP
 
   private
 
-    def check_required_attributes(document)
-      REQUIRED_ATTRIBUTES.each do |attribute_name|
+    def check_required_attributes(document, required_attributes)
+      required_attributes.each do |attribute_name|
         raise MissingAttributeError, "Missing required attribute: #{attribute_name}" unless attribute_exists(document, attribute_name)
       end
     end
