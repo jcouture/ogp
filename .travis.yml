@@ -3,7 +3,7 @@ sudo: false
 language: ruby
 
 rvm:
-  - 2.7
+  - 2.7.3
 
 script:
   - bundle exec rake spec
