@@ -21,7 +21,7 @@ module OGP
       if source.nil? || source.empty?
         raise ArgumentError, '`source` cannot be nil or empty.'
       end
-      
+
       opts[:required_attributes] ||= DEFAULT_REQUIRED_ATTRIBUTES
 
       raise MalformedSourceError unless source.include?('</html>')

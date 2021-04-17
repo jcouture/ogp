@@ -23,7 +23,7 @@ describe OGP::OpenGraph do
       it 'should not raise an error if missing attribute is not required' do
         content = File.read("#{File.dirname(__FILE__)}/../fixtures/missing_required_attributes.html")
 
-        open_graph = OGP::OpenGraph.new(content, { required_attributes: ['title', 'type', 'url'] })
+        open_graph = OGP::OpenGraph.new(content, { required_attributes: %w(title type url) })
         expect(open_graph.title).to eql('The Rock')
         expect(open_graph.type).to eql('video.movie')
         expect(open_graph.url).to eql('http://www.imdb.com/title/tt0117500/')
