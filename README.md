@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/jcouture/ogp">
-    <img src="https://i.imgur.com/qZrMsLq.png" alt="ogp" />
+    <img src="https://i.imgur.com/8ehwe6E.png" alt="ogp" />
   </a>
   <br />
   OGP is a minimalist Ruby library that does only one thing: parse Open Graph protocol information. For more information: <a href="http://ogp.me">http://ogp.me</a>.

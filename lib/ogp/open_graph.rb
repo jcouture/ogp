@@ -12,19 +12,16 @@ module OGP
 
     # Required Accessors
     attr_accessor :title, :type, :url
-    attr_accessor :images
+    attr_accessor :images, :audios, :locales, :videos
 
     # Optional Accessors
     attr_accessor :description, :determiner, :site_name
-    attr_accessor :audios
-    attr_accessor :locales
-    attr_accessor :videos
 
     def initialize(source, opts = {})
       if source.nil? || source.empty?
         raise ArgumentError, '`source` cannot be nil or empty.'
       end
-      
+
       opts[:required_attributes] ||= DEFAULT_REQUIRED_ATTRIBUTES
 
       raise MalformedSourceError unless source.include?('</html>')
@@ -44,6 +41,7 @@ module OGP
 
     def image
       return if images.nil?
+
       images.first
     end
 
@@ -60,14 +58,14 @@ module OGP
       document.xpath('//head/meta[starts-with(@property, \'og:\')]').each do |attribute|
         attribute_name = attribute.get('property').downcase.gsub('og:', '')
 
-        if data.has_key?(attribute_name)
+        if data.key?(attribute_name)
           # There can be multiple entries for the same og tag, see
           # https://open.spotify.com/album/3NkIlQR6wZwPCQiP1vPjF8 for an example
           # where there are multiple `restrictions:country:allowed` og tags.
           #
           # In this case store the content values as an array.
-          if !data[attribute_name].kind_of?(Array)
-            data[attribute_name] = [ data[attribute_name] ]
+          unless data[attribute_name].is_a?(Array)
+            data[attribute_name] = [data[attribute_name]]
           end
           data[attribute_name] << attribute.get('content')
         else
@@ -105,6 +103,7 @@ module OGP
         end
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def attribute_exists(document, name)
       document.at_xpath("boolean(//head/meta[@property='og:#{name}'])")

@@ -1,120 +1,140 @@
 AllCops:
   DisplayCopNames: true
-  Include:
-    - Rakefile
-    - config.ru
-    - Gemfile
-    - app/tasks/**/*.rake
-  Exclude:
-    - bin/**
-    - db/schema.rb
-    - db/migrate/**
-    - script/**
-    - vendor/**/*
-    - node_modules/**/*
-  TargetRubyVersion: 2.3
+  SuggestExtensions: false
+  TargetRubyVersion: 2.7
 
-Rails:
+Bundler/OrderedGems: 
   Enabled: false
 
-Documentation:
-  Enabled: false
+Gemspec/DateAssignment: 
+  Enabled: true
 
-Encoding:
-  Enabled: false
-
-LineLength:
-  Max: 200
-
-AccessModifierIndentation:
+Layout/AccessModifierIndentation: 
   EnforcedStyle: outdent
-
-IfUnlessModifier:
-  Enabled: false
-
-CaseIndentation:
+Layout/CaseIndentation: 
   EnforcedStyle: end
   IndentOneStep: true
+Layout/ExtraSpacing: 
+  Enabled: true
+Layout/FirstArrayElementIndentation: 
+  Enabled: false
+Layout/HashAlignment: 
+  Enabled: false
+Layout/LineLength: 
+  Max: 200
+Layout/MultilineMethodCallIndentation: 
+  Enabled: false
+Layout/ParameterAlignment: 
+  EnforcedStyle: with_fixed_indentation
+Layout/SpaceBeforeBrackets: 
+  Enabled: true
+Layout/SpaceInLambdaLiteral: 
+  Enabled: false
 
-MethodLength:
+Lint/AmbiguousAssignment: 
+  Enabled: true
+Lint/AssignmentInCondition: 
+  Enabled: false
+Lint/DeprecatedConstants: 
+  Enabled: true
+Lint/DuplicateBranch: 
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement: 
+  Enabled: true
+Lint/EmptyBlock: 
+  Enabled: true
+Lint/EmptyClass: 
+  Enabled: true
+Lint/LambdaWithoutLiteralBlock: 
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks: 
+  Enabled: true
+Lint/NumberedParameterAssignment: 
+  Enabled: true
+Lint/OrAssignmentToConstant: 
+  Enabled: true
+Lint/RedundantDirGlobSort: 
+  Enabled: true
+Lint/SymbolConversion: 
+  Enabled: true
+Lint/ToEnumArguments: 
+  Enabled: true
+Lint/TripleQuotes: 
+  Enabled: true
+Lint/UnexpectedBlockArity: 
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator: 
+  Enabled: true
+
+Metrics/AbcSize: 
+  Enabled: false
+Metrics/BlockLength: 
+  Max: 200
+Metrics/MethodLength: 
   CountComments: false
-  Max: 25
-
-SignalException:
+  Max: 40
+Metrics/PerceivedComplexity:
   Enabled: false
-
-ColonMethodCall:
-  Enabled: false
-
-AsciiComments:
-  Enabled: false
-
-RegexpLiteral:
-  Enabled: false
-
-AssignmentInCondition:
-  Enabled: false
-
-ParameterLists:
+Metrics/ParameterLists: 
   CountKeywordArgs: false
 
-SingleLineBlockParams:
-  Methods:
-    - reduce:
-      - memo
-      - item
-
-MethodCalledOnDoEndBlock:
+Style/ArgumentsForwarding: 
   Enabled: true
-
-Metrics/AbcSize:
-  Enabled: false
-
-Style/CollectionMethods:
+Style/CollectionCompact: 
   Enabled: true
-
-Style/SymbolArray:
+Style/CollectionMethods: 
   Enabled: true
-
-Layout/ExtraSpacing:
+Style/ColonMethodCall: 
+  Enabled: false
+Style/DocumentDynamicEvalDefinition: 
   Enabled: true
-
-Layout/MultilineMethodCallIndentation:
+Style/Documentation: 
   Enabled: false
-
-Layout/IndentArray:
+Style/Encoding: 
   Enabled: false
-
-Layout/AlignHash:
+Style/EndlessMethod: 
+  Enabled: true
+Style/FrozenStringLiteralComment: 
   Enabled: false
-
-Layout/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-
-Style/FrozenStringLiteralComment:
+Style/HashConversion: 
+  Enabled: true
+Style/HashExcept: 
+  Enabled: true
+Style/IfUnlessModifier: 
   Enabled: false
-
-Rails/SkipsModelValidations:
+Style/IfWithBooleanLiteralBranches: 
+  Enabled: true
+Style/MethodCalledOnDoEndBlock: 
+  Enabled: true
+Style/NegatedIfElseCondition: 
+  Enabled: true
+Style/NilLambda: 
+  Enabled: true
+Style/PercentLiteralDelimiters: 
+  PreferredDelimiters: 
+    ? "%I"
+    : ()
+    ? "%W"
+    : ()
+    ? "%i"
+    : ()
+    ? "%w"
+    : ()
+Style/RedundantArgument: 
+  Enabled: true
+Style/RegexpLiteral: 
   Enabled: false
-
-Metrics/BlockLength:
-  Max: 200
-
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    '%i': '()'
-    '%I': '()'
-    '%w': '()'
-    '%W': '()'
-
-Layout/SpaceInLambdaLiteral:
+Style/SignalException: 
   Enabled: false
-
-Bundler/OrderedGems:
-  Enabled: false
-
-Rails/OutputSafety:
-  Enabled: false
-
-Performance/StringReplacement:
-  Enabled: false
+Style/SingleLineBlockParams: 
+  Methods: 
+    - 
+      reduce: 
+        - memo
+        - item
+Style/StringChars: 
+  Enabled: true
+Style/SwapValues: 
+  Enabled: true
+Style/SymbolArray: 
+  Enabled: true
