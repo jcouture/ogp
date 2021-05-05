@@ -47,6 +47,20 @@ open_graph.url # => "http://ogp.me/"
 open_graph.data["title"] # => "Open Graph protocol"
 ```
 
+### Attribute Validation
+
+By default `OGP::OpenGraph.new` validates the presence of the Open Graph attributes `title`, `type`, `image`, `url`. If one or more of those are missing it raises a `MissingAttributeError`.
+
+To require less or more attributes to be present, supply an array of attribute names with the `:required_attributes` option. Examples:
+
+```ruby
+# When you only need title and image
+open_graph = OGP::OpenGraph.new(response.body, required_attributes: %w(title image))
+
+# When you require a description, too!
+open_graph = OGP::OpenGraph.new(response.body, required_attributes: %w(title type image url description))
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/jcouture/ogp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
