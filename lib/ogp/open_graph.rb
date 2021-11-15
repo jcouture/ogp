@@ -5,8 +5,6 @@ DEFAULT_REQUIRED_ATTRIBUTES = %w(title type image url).freeze
 
 module OGP
   class OpenGraph
-    REQUIRED_ATTRIBUTES = %w(title type image url).freeze
-
     # Accessor for storing all open graph data
     attr_accessor :data
 
